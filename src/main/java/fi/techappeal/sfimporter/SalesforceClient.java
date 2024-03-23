@@ -38,7 +38,7 @@ public class SalesforceClient {
                 .retrieve()
                 .toEntity(String.class).getBody();
     }
-    private static record Login(
+    private record Login(
             String access_token,
             String signature,
             String instance_url,
