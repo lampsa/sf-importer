@@ -2,6 +2,8 @@ spring:
   main:
     web-application-type: none
 salesforce:
+  base:
+    url: https://techappealoy-dev-ed.develop.my.salesforce.com
   client:
     id: 3MVG9PwZx9R6_Urd3TQzsvRF6g1uJmOdNZ3y0xJw9sYrkOkr9Ok4JVMl9FqlISzMw18ea9j9Q8IZ4x9p2pqCO
     secret: 27D1E0A00AE3852D79313CE3A64B83572672FE20AA2F52CAD558519B5CAC5A8F

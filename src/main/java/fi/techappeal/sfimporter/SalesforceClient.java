@@ -9,15 +9,17 @@ public class SalesforceClient {
     private final RestClient restClient = RestClient.builder().build();
     private final String clientId;
     private final String clientSecret;
-    private final String baseUrl = "https://techappealoy-dev-ed.develop.my.salesforce.com";
+    private final String baseUrl;
 
     private String accessToken;
 
     public SalesforceClient(
             @Value("${salesforce.client.id}") String clientId,
-            @Value("${salesforce.client.secret}") String clientSecret) {
+            @Value("${salesforce.client.secret}") String clientSecret,
+            @Value("${salesforce.base.url}") String baseUrl) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
+        this.baseUrl = baseUrl;
     }
 
     public void login() {
