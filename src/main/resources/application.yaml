@@ -1,6 +1,6 @@
 spring:
   main:
-    web-application-type: none
+    web-application-type: none # Disable web server
 salesforce:
   base:
     url: https://techappealoy-dev-ed.develop.my.salesforce.com
