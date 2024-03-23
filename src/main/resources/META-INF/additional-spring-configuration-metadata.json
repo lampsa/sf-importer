@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "salesforce.client.id",
+      "type": "java.lang.String",
+      "description": "Client id for Salesforce."
+    },
+    {
+      "name": "salesforce.client.secret",
+      "type": "java.lang.String",
+      "description": "Client secret for Salesforce."
+    }
+  ]
+}
