@@ -9,6 +9,11 @@
       "name": "salesforce.client.secret",
       "type": "java.lang.String",
       "description": "Client secret for Salesforce."
+    },
+    {
+      "name": "salesforce.base.url",
+      "type": "java.lang.String",
+      "description": "Base URL for Salesforce instance to connect."
     }
   ]
 }
