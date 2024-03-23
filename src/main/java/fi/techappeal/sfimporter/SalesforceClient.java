@@ -22,12 +22,12 @@ public class SalesforceClient {
     }
 
     public void login() {
-        SalesforceLogin salesforceLogin = restClient.post()
+        Login salesforceLogin = restClient.post()
                 .uri("/services/oauth2/token")
                 .body("client_id=" + clientId + "&client_secret=" + clientSecret + "&grant_type=client_credentials")
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .retrieve()
-                .toEntity(SalesforceLogin.class).getBody();
+                .toEntity(Login.class).getBody();
         accessToken = salesforceLogin.access_token();
     }
 
@@ -38,4 +38,13 @@ public class SalesforceClient {
                 .retrieve()
                 .toEntity(String.class).getBody();
     }
+    private static record Login(
+            String access_token,
+            String signature,
+            String instance_url,
+            String id,
+            String token_type,
+            String issued_at,
+            String scope,
+            String refresh_token) { }
 }
