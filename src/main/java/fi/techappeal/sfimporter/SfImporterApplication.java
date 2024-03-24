@@ -29,11 +29,10 @@ public class SfImporterApplication implements CommandLineRunner {
         String accessToken = client.login();
         SalesforceClient.ChangedObjects changedObjects = client.getChangedContacts(accessToken);
 
-        for(String s : changedObjects.ids()) {
-            LOG.info("Fetching changed contact id: {}", s);
-            LOG.info(client.getContact(accessToken, s));
+        for(String id : changedObjects.ids()) {
+            LOG.info("Fetching changed contact id: {}", id);
+            LOG.info(client.getContact(accessToken, id));
         }
         LOG.info("Latest date covered: {}", changedObjects.latestDateCovered());
-
     }
 }
