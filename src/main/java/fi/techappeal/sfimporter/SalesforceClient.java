@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+import java.util.Date;
+import java.util.List;
+
 @Service
 public class SalesforceClient {
     private final RestClient restClient;
@@ -32,13 +35,26 @@ public class SalesforceClient {
         return salesforceLogin.access_token();
     }
 
-    public String getChangedContacts(String accessToken) {
+    public ChangedObjects getChangedContacts(String accessToken) {
         return restClient.get()
                 .uri(contactPath+"/updated/?start=2024-03-20T00:00:00Z&end=2024-03-24T00:00:00Z")
                 .header("Authorization", "Bearer " + accessToken)
                 .retrieve()
+                .toEntity(ChangedObjects.class).getBody();
+    }
+
+    public String getContact(String accessToken, String id) {
+        return restClient.get()
+                .uri(contactPath + "/" + id)
+                .header("Authorization", "Bearer " + accessToken)
+                .retrieve()
                 .toEntity(String.class).getBody();
     }
+
+    public record ChangedObjects(
+            List<String> ids,
+            Date latestDateCovered
+    ) { }
     private record Login(
             String access_token,
             String signature,
