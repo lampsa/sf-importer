@@ -26,7 +26,7 @@ public class SfImporterApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        client.login();
-        LOG.info(client.query());
+        String accessToken = client.login();
+        LOG.info(client.getChangedContacts(accessToken));
     }
 }

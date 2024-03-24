@@ -9,31 +9,32 @@ public class SalesforceClient {
     private final RestClient restClient;
     private final String clientId;
     private final String clientSecret;
-
-    private String accessToken;
+    private final String contactPath;
 
     public SalesforceClient(
             @Value("${salesforce.client.id}") String clientId,
             @Value("${salesforce.client.secret}") String clientSecret,
-            @Value("${salesforce.base.url}") String baseUrl) {
+            @Value("${salesforce.base.url}") String baseUrl,
+            @Value("${salesforce.api.contact.path}") String contactPath) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.restClient = RestClient.create(baseUrl);
+        this.contactPath = contactPath;
     }
 
-    public void login() {
+    public String login() {
         Login salesforceLogin = restClient.post()
                 .uri("/services/oauth2/token")
                 .body("client_id=" + clientId + "&client_secret=" + clientSecret + "&grant_type=client_credentials")
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .retrieve()
                 .toEntity(Login.class).getBody();
-        accessToken = salesforceLogin.access_token();
+        return salesforceLogin.access_token();
     }
 
-    public String query() {
+    public String getChangedContacts(String accessToken) {
         return restClient.get()
-                .uri("/services/data/v60.0/sobjects/Contact/updated/?start=2024-03-20T00:00:00Z&end=2024-03-24T00:00:00Z")
+                .uri(contactPath+"/updated/?start=2024-03-20T00:00:00Z&end=2024-03-24T00:00:00Z")
                 .header("Authorization", "Bearer " + accessToken)
                 .retrieve()
                 .toEntity(String.class).getBody();
