@@ -1,6 +1,9 @@
 spring:
   main:
     web-application-type: none # Disable web server
+    banner-mode: off
+  profiles:
+    active: default
 salesforce:
   base:
     url: https://techappealoy-dev-ed.develop.my.salesforce.com
